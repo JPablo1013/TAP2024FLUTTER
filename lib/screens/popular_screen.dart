@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tap2024/models/popular_model.dart';
 import 'package:tap2024/network/api_popular.dart';
+import 'package:tap2024/views/popular_view.dart';
 
 class PopularScreen extends StatefulWidget {
   const PopularScreen({super.key});
@@ -27,13 +28,14 @@ class _PopularScreenState extends State<PopularScreen> {
         future: apiPopular?.getAllPopular(),
         builder: (context, AsyncSnapshot<List<PopularModel>?> snapshot){
           if(snapshot.hasData){
-            return ListView.builder(
+            return ListView.separated(
+              separatorBuilder: (context, index) => SizedBox(height: 10,),
               itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) => Text(snapshot.data![index].title) 
+              itemBuilder: (context, index) => PopularView(popularModel: snapshot.data![index],) 
               );
           }else{
             if(snapshot.hasError){
-              return Text('Ocurrio un error');
+              return Text('${snapshot.error}');
             }else{
               return Center (child: CircularProgressIndicator(),);
             }

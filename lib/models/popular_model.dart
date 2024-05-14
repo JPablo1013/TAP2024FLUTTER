@@ -27,7 +27,7 @@ class PopularModel {
 
    factory PopularModel.fromMap (Map<String,dynamic> map){
     return PopularModel(
-      backdropPath: map['backdrop_path'], 
+      backdropPath: map['backdrop_path'] ?? '', 
       id: map['id'], 
       originalLanguage: map['original_language'], 
       originalTitle: map['original_title'], 
