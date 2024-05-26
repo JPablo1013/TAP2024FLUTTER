@@ -34,8 +34,8 @@ class PopularView extends StatelessWidget {
                     subtitle: Text(popularModel!.releaseDate, style: TextStyle(color: Colors.white),maxLines: 1,),
                     //trailing: Icon(Icons.favorite_border, color: Colors.white,),
                     trailing: IconButton(
-                      onPressed:(){},
-                      icon: const Icon(Icons.favorite_border),
+                      onPressed:()=> Navigator.pushNamed(context, "/detail", arguments: popularModel),
+                      icon: const Icon(Icons.chevron_right),
                       color: Colors.white,
                     )
                   ),

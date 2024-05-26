@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tap2024/screens/home_screen.dart';
 import 'package:tap2024/screens/intenciones_screen.dart';
 import 'package:tap2024/screens/login_screen2.dart';
+import 'package:tap2024/screens/movie_detail_screen.dart';
 import 'package:tap2024/screens/popular_screen.dart';
 import 'package:tap2024/screens/splash_screen.dart';
 import 'package:tap2024/settings/theme_settings.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
           routes: {
             "/home" :(context) => const HomeScreen(),
             "/login2":(context) =>const LoginScreen2(),
-            "/intent": (context) => const IntencionesScreen()
+            "/intent": (context) => const IntencionesScreen(),
+            "/detail": (context) => const MovieDetailScreen()
           },
           //'/register': (context) => RegisterScreen(),
         );
