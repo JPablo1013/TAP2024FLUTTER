@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-class CategoriesDB{
+/*class CategoriesDB{
   static final NAMEDB = "TAQUERIA";
   static final VERSIONDB = 1;
 
@@ -18,4 +18,4 @@ class CategoriesDB{
     String pathDB = join (folder.path + "/$NAMEDB.db");
   }
 
-}
+}*/
