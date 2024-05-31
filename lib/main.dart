@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tap2024/screens/casting_screen.dart';
 import 'package:tap2024/screens/home_screen.dart';
 import 'package:tap2024/screens/intenciones_screen.dart';
 import 'package:tap2024/screens/login_screen2.dart';
@@ -28,7 +29,10 @@ class MyApp extends StatelessWidget {
             "/home" :(context) => const HomeScreen(),
             "/login2":(context) =>const LoginScreen2(),
             "/intent": (context) => const IntencionesScreen(),
-            "/detail": (context) => const MovieDetailScreen()
+            "/detail": (context) => const MovieDetailScreen(),
+            //"/actors": (context) => CastingScreen(),
+
+
           },
           //'/register': (context) => RegisterScreen(),
         );
