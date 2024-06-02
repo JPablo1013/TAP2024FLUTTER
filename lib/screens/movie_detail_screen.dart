@@ -117,24 +117,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        // Supongamos que ya tienes una lista de videos disponible llamada `videosList`
-                        final videosList = []; // Debes obtener la lista de videos de alguna manera
-
-                        // Navega a la clase TrailerScreen
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => TrailerScreen(
-                              movieId: popularModel.id, // O cualquier otra forma de obtener el ID de la película
-                              videos: videosList,
-                            ),
-                          ),
-                        );
-                      },
-                      child: Text('Ver Trailer'),
-                    ),
+                    child: 
+                        ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/trailer');
+                        },
+                        child: const Text('Ver Trailer'),
+                      ),
                   ),
                 ],
               ),
