@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tap2024/models/popular_model.dart';
+import 'package:tap2024/models/detail_model.dart';
+import 'package:tap2024/network/api_detail.dart';
+import 'casting_screen.dart';
+import 'trailer_screen.dart'; // Importa la clase TrailerScreen
 
 class MovieDetailScreen extends StatefulWidget {
   const MovieDetailScreen({Key? key}) : super(key: key);
@@ -29,8 +33,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           ),
         ],
       ),
-      extendBodyBehindAppBar: true, // Para extender el fondo detrás del app bar
-      backgroundColor: Colors.transparent, // Hacer transparente el color de fondo del scaffold
+      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.transparent,
       body: Stack(
         children: [
           Container(
@@ -42,7 +46,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
             ),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.5), // Aplicar un filtro oscuro sobre la imagen de fondo
+                color: Colors.black.withOpacity(0.5),
               ),
             ),
           ),
@@ -67,7 +71,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                             Icon(Icons.star, color: Colors.amber),
                             SizedBox(width: 8),
                             Text(
-                              '${popularModel.voteAverage}/10', // Mostrar el rating de la película
+                              '${popularModel.voteAverage}/10',
                               style: TextStyle(fontSize: 16, color: Colors.white),
                             ),
                           ],
@@ -90,6 +94,46 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                       ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        final api = ApiPopular();
+                        final topLevel = await api.getMovieCredits(popularModel.id);
+
+                        if (topLevel != null) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CastingScreen(topLevel: topLevel),
+                            ),
+                          );
+                        }
+                      },
+                      child: Text('Ver Actores'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        // Supongamos que ya tienes una lista de videos disponible llamada `videosList`
+                        final videosList = []; // Debes obtener la lista de videos de alguna manera
+
+                        // Navega a la clase TrailerScreen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TrailerScreen(
+                              movieId: popularModel.id, // O cualquier otra forma de obtener el ID de la película
+                              videos: videosList,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text('Ver Trailer'),
                     ),
                   ),
                 ],

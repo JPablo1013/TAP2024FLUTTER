@@ -18,14 +18,10 @@ class CastingScreen extends StatelessWidget {
           final actor = topLevel.cast[index];
           return ListTile(
             leading: CircleAvatar(
-              // Puedes cargar la imagen del perfil del actor si tienes la URL
-              // Puedes usar NetworkImage(actor.profilePath) si tienes la URL de la imagen
-              child: Text(actor.name[0]), // Muestra la primera letra del nombre por ahora
+              backgroundImage: NetworkImage('https://image.tmdb.org/t/p/w500${actor.profilePath}'),
             ),
             title: Text(actor.name),
             subtitle: Text(actor.character),
-            // Puedes agregar más detalles del actor si lo deseas
-            // Ejemplo: trailing: Text('ID: ${actor.id}'),
           );
         },
       ),
