@@ -1,5 +1,3 @@
-import 'package:tap2024/models/popular_model.dart';
-
 class TopLevel {
   final int id;
   final List<Cast> cast;

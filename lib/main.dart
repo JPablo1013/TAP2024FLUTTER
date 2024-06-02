@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
             "/login2": (context) => const LoginScreen2(),
             "/intent": (context) => const IntencionesScreen(),
             "/detail": (context) => const MovieDetailScreen(),
-            "/trailer": (context) => const TrailerScreen(),
+            "/trailer": (context) => const TrailerScreen(videos: [],),
           },
         );
       },

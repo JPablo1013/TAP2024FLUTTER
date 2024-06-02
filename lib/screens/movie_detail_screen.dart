@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tap2024/models/popular_model.dart';
 import 'package:tap2024/models/detail_model.dart';
-import 'package:tap2024/network/api_detail.dart';
+import 'package:tap2024/network/api_manager.dart'; 
 import 'casting_screen.dart';
-import 'trailer_screen.dart'; // Importa la clase TrailerScreen
+import 'trailer_screen.dart';
 
 class MovieDetailScreen extends StatefulWidget {
   const MovieDetailScreen({Key? key}) : super(key: key);
@@ -14,6 +14,7 @@ class MovieDetailScreen extends StatefulWidget {
 
 class _MovieDetailScreenState extends State<MovieDetailScreen> {
   bool isFavorite = false;
+  final ApiManager apiManager = ApiManager();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           IconButton(
             onPressed: () {
               setState(() {
-                isFavorite = !isFavorite; // Cambiar el estado de la película como favorita
+                isFavorite = !isFavorite; 
               });
             },
             icon: isFavorite ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
@@ -100,8 +101,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     padding: const EdgeInsets.all(16.0),
                     child: ElevatedButton(
                       onPressed: () async {
-                        final api = ApiPopular();
-                        final topLevel = await api.getMovieCredits(popularModel.id);
+                        final topLevel = await apiManager.getMovieCredits(popularModel.id);
 
                         if (topLevel != null) {
                           Navigator.push(
@@ -117,13 +117,25 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: 
-                        ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/trailer');
-                        },
-                        child: const Text('Ver Trailer'),
-                      ),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        final videos = await apiManager.getMovieVideos(popularModel.id);
+
+                        if (videos != null && videos.isNotEmpty) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TrailerScreen(videos: videos),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('No hay trailers disponibles')),
+                          );
+                        }
+                      },
+                      child: Text('Ver Trailer'),
+                    ),
                   ),
                 ],
               ),

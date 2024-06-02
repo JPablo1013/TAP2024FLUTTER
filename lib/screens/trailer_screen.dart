@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tap2024/models/trailer_model.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class TrailerScreen extends StatefulWidget {
-  const TrailerScreen({Key? key}) : super(key: key);
+  final List<VideoModel> videos;
+
+  const TrailerScreen({Key? key, required this.videos}) : super(key: key);
 
   @override
   _TrailerScreenState createState() => _TrailerScreenState();
@@ -14,9 +17,10 @@ class _TrailerScreenState extends State<TrailerScreen> {
   @override
   void initState() {
     super.initState();
-    const videoUrl = 'https://www.youtube.com/watch?v=GQyWIur03aw';
+    final firstVideoKey = widget.videos.first.key; // Obtén la clave del primer video
+    final videoUrl = 'https://www.youtube.com/watch?v=$firstVideoKey'; // Construye la URL de YouTube
     _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(videoUrl)!,
+      initialVideoId: firstVideoKey,
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
