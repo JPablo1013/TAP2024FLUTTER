@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tap2024/models/popular_model.dart';
-import 'package:tap2024/models/detail_model.dart';
 import 'package:tap2024/network/api_manager.dart'; 
 import 'casting_screen.dart';
 import 'trailer_screen.dart';
