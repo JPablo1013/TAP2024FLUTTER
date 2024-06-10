@@ -1,0 +1,25 @@
+class MovieDetails {
+  final int id;
+  final List<Cast> cast;
+  final List<VideoModel> videos;
+  final PopularModel popular;
+
+  MovieDetails({
+    required this.id,
+    required this.cast,
+    required this.videos,
+    required this.popular,
+  });
+
+  factory MovieDetails.fromJson(Map<String, dynamic> json) {
+    var castList = (json['cast'] as List).map((e) => Cast.fromJson(e)).toList();
+    var videoList = (json['videos'] as List).map((e) => VideoModel.fromJson(e)).toList();
+
+    return MovieDetails(
+      id: json['id'],
+      cast: castList,
+      videos: videoList,
+      popular: PopularModel.fromMap(json),
+    );
+  }
+}

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:tap2024/models/detail_model.dart';
+import 'package:tap2024/screens/casting_screen.dart';
 import 'package:tap2024/screens/home_screen.dart';
 import 'package:tap2024/screens/intenciones_screen.dart';
 import 'package:tap2024/screens/login_screen2.dart';
 import 'package:tap2024/screens/movie_detail_screen.dart';
 import 'package:tap2024/screens/popular_screen.dart';
-import 'package:tap2024/screens/splash_screen.dart';
+import 'package:tap2024/screens/trailer_screen.dart';
 import 'package:tap2024/settings/theme_settings.dart';
 import 'package:tap2024/settings/value_listener.dart';
 
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  ValueListenableBuilder(
+    return ValueListenableBuilder(
       valueListenable: ValueListener.isDark,
       builder: (context, value, child) {
         return MaterialApp(
@@ -24,18 +26,30 @@ class MyApp extends StatelessWidget {
           theme: value 
             ? ThemeSettings.darkTheme(context) 
             : ThemeSettings.lightTheme(context),
-          routes: {
-            "/home" :(context) => const HomeScreen(),
-            "/login2":(context) =>const LoginScreen2(),
-            "/intent": (context) => const IntencionesScreen(),
-            "/detail": (context) => const MovieDetailScreen()
+          onGenerateRoute: (settings) {
+            if (settings.name == '/casting') {
+              final args = settings.arguments as TopLevel;
+              return MaterialPageRoute(
+                builder: (context) => CastingScreen(topLevel: args),
+              );
+            }
+            // Add more route handling here if necessary
+            return null;
           },
-          //'/register': (context) => RegisterScreen(),
+          routes: {
+            "/home": (context) => const HomeScreen(),
+            "/login2": (context) => const LoginScreen2(),
+            "/intent": (context) => const IntencionesScreen(),
+            "/detail": (context) => const MovieDetailScreen(),
+            "/trailer": (context) => const TrailerScreen(videos: [],),
+          },
         );
-      }
+      },
     );
   }
 }
+
+
 
 
 
